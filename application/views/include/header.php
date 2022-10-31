@@ -9,3 +9,12 @@
 </head>
 
 <body>
+    <nav>
+        <ul>
+            <li><a href="<?= base_url('home'); ?> ">Dashboard</a></li>
+            <li><a href="<?= base_url('sales'); ?>">Penjualan</a></li>
+            <li><a href="<?= base_url('purchase'); ?>">Pembelian</a></li>
+            <li><a href="<?= base_url('report'); ?>">Laporan</a></li>
+            <li><a href="<?= base_url('setting'); ?>">Setting</a></li>
+        </ul>
+    </nav>
