@@ -1,7 +1,7 @@
 <div class="container">
     <h1>Dashboard</h1>
-    <button>+ Tambah Produk</button>
-    <table>
+    <button class="btn btn-primary">+ Tambah Produk</button>
+    <table class="table">
         <tr>
             <th><a href="http://">NO</a></th>
             <th><a href="http://">NAMA</a></th>

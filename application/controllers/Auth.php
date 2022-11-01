@@ -3,6 +3,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Auth extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     public function index()
     {
@@ -11,8 +15,6 @@ class Auth extends CI_Controller
 
     public function register()
     {
-        $this->load->view('include/header');
         $this->load->view('auth/register');
-        $this->load->view('include/footer');
     }
 }
