@@ -20,7 +20,7 @@
     <div class="container d-flex justify-content-center align-items-center">
         <div class="login-form">
             <h1>APP POS by <strong class="text-danger">DNA Network</strong></h1>
-            <form action="#" method="post">
+            <form action="<?= base_url('auth'); ?>" method="post">
                 <div class="row">
                     <div class="col-sm">
                         <label for="username" class="form-label">Username</label>
@@ -28,10 +28,10 @@
                     </div>
                     <div class="col-sm">
                         <label for="password" class="form-label">Password</label>
-                        <input type="text" class="form-control" name="password" id="password">
+                        <input type="password" class="form-control" name="password" id="password">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-dark mt-3">Sign in</button>
+                <button type="submit" class="btn btn-dark mt-1">Sign in</button>
             </form>
             <a href="<?= base_url("auth/register"); ?> ">Daftar pengguna baru disini !</a>
         </div>
