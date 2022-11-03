@@ -7,56 +7,27 @@
 <table class="table display">
     <thead>
         <tr>
-            <th><a href="http://">NO</a></th>
-            <th><a href="http://">NAMA</a></th>
-            <th><a href="http://">MODAL</a></th>
-            <th><a href="http://">JUAL</a></th>
-            <th><a href="http://">SISA</a></th>
+            <th>KODE</th>
+            <th>NAMA</th>
+            <th>KATEGORI</th>
+            <th>MODAL</th>
+            <th>JUAL</th>
+            <th>SISA</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>1</td>
-            <td>KIPAS ANGIN MIYAKO</td>
-            <td>245.000</td>
-            <td>350.000</td>
-            <td>10</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>KIPAS ANGIN MIYAKO</td>
-            <td>245.000</td>
-            <td>350.000</td>
-            <td>10</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>KIPAS ANGIN MIYAKO</td>
-            <td>245.000</td>
-            <td>350.000</td>
-            <td>10</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>KIPAS ANGIN MIYAKO</td>
-            <td>245.000</td>
-            <td>350.000</td>
-            <td>10</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>KIPAS ANGIN MIYAKO</td>
-            <td>245.000</td>
-            <td>350.000</td>
-            <td>10</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>KIPAS ANGIN MIYAKO</td>
-            <td>245.000</td>
-            <td>350.000</td>
-            <td>10</td>
-        </tr>
+        <?php
+        foreach ($product as $p) {
+        ?>
+            <tr>
+                <td><?= $p['kode']; ?></td>
+                <td><?= $p['nama']; ?></td>
+                <td><?= $p['category']; ?></td>
+                <td><?= $p['beli']; ?></td>
+                <td><?= $p['jual']; ?></td>
+                <td><?= $p['stok']; ?></td>
+            </tr>
+        <?php }; ?>
     </tbody>
 
 </table>
