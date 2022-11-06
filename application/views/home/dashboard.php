@@ -13,6 +13,7 @@
             <th>MODAL</th>
             <th>JUAL</th>
             <th>SISA</th>
+            <th>DETAIL</th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +27,10 @@
                 <td><?= $p['beli']; ?></td>
                 <td><?= $p['jual']; ?></td>
                 <td><?= $p['stok']; ?></td>
+                <td>
+                    <a href="<?= base_url('home/edit_product/') . $p['inv_id'];; ?> ">Edit Produk</a>
+                    <a href="<?= base_url('home/pr_detail/') . $p['inv_id'];; ?> ">Detail</a>
+                </td>
             </tr>
         <?php }; ?>
     </tbody>

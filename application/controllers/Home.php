@@ -13,7 +13,7 @@ class Home extends CI_Controller
 
     public function index()
     {
-        $data['product'] = $this->db->join('product_cat', 'product_cat.id = inventory.cat_id')->get('inventory')->result_array();
+        $data['product'] = $this->db->query('SELECT *, inventory.id as inv_id FROM inventory JOIN product_cat ON product_cat.id = inventory.cat_id')->result_array();
 
         $data['title'] = 'Dashboard';
         $this->load->view('include/header', $data);
@@ -72,6 +72,44 @@ class Home extends CI_Controller
             ];
             $this->db->insert('inventory', $data);
             redirect('home/addProduct');
+        }
+    }
+
+    public function pr_detail($pr_id)
+    {
+        $data['product'] = $this->db->query("SELECT *, inventory.id as inv_id FROM inventory JOIN product_cat ON product_cat.id = inventory.cat_id WHERE inventory.id = '$pr_id'")->row_array();
+
+        $data['title'] = 'Dashboard - Product Detail - ' . $data['product']['nama'];
+        $this->load->view('include/header', $data);
+        $this->load->view('home/product_detail', $data);
+        $this->load->view('include/footer');
+    }
+
+    public function edit_product($pr_id)
+    {
+        $data['product'] = $this->db->get_where('inventory', ['id' => $pr_id])->row_array();
+        $data['cat_product'] = $this->db->get('product_cat')->result_array();
+
+        $this->form_validation->set_rules('p_name', 'Nama Produk', 'required|min_length[5]|max_length[90]|alpha_numeric_spaces|trim');
+        $this->form_validation->set_rules('p_sale', 'Harga Jual', 'required|numeric|trim');
+        $this->form_validation->set_rules('p_cat', 'Kategori', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Dashboard - Product Detail - ' . $data['product']['nama'];
+            $this->load->view('include/header', $data);
+            $this->load->view('home/edit_product', $data);
+            $this->load->view('include/footer');
+        } else {
+            $data = [
+                'nama' => $this->input->post('p_name'),
+                'cat_id' => $this->input->post('p_cat'),
+                'jual' => $this->input->post('p_sale'),
+            ];
+
+            $p_id = $this->input->post('p_id');
+
+            $this->db->update('inventory', $data, ['id' => $p_id]);
+            redirect('home/edit_product/' . $p_id);
         }
     }
 }
