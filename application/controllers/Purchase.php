@@ -12,8 +12,9 @@ class Purchase extends CI_Controller
 
     public function index()
     {
-        $this->load->view('include/header');
-        $this->load->view('purchase/purchase');
+        $data['title'] = 'Pembelian';
+        $this->load->view('include/header', $data);
+        $this->load->view('purchase/index', $data);
         $this->load->view('include/footer');
     }
 

@@ -13,8 +13,9 @@ class Sales extends CI_Controller
 
     public function index()
     {
-        $this->load->view('include/header');
-        $this->load->view('sales/sales');
+        $data['title'] = 'Penjualan';
+        $this->load->view('include/header', $data);
+        $this->load->view('sales/sales', $data);
         $this->load->view('include/footer');
     }
 

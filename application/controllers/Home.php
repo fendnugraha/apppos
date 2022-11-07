@@ -15,6 +15,8 @@ class Home extends CI_Controller
     {
         $data['product'] = $this->db->query('SELECT *, inventory.id as inv_id FROM inventory JOIN product_cat ON product_cat.id = inventory.cat_id')->result_array();
 
+        $data['total_inv'] = $this->db->query('SELECT sum(beli*stok) as total_inv FROM inventory')->row_array();
+
         $data['title'] = 'Dashboard';
         $this->load->view('include/header', $data);
         $this->load->view('home/dashboard', $data);
