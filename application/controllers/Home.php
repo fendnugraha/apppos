@@ -52,7 +52,6 @@ class Home extends CI_Controller
         $this->form_validation->set_rules('p_code', 'Kode Produk', 'required|min_length[2]|alpha_numeric|trim|is_unique[inventory.kode]');
         $this->form_validation->set_rules('p_cost', 'Harga Beli', 'required|numeric|trim');
         $this->form_validation->set_rules('p_sale', 'Harga Jual', 'required|numeric|trim');
-        $this->form_validation->set_rules('p_stock', 'Stok Awal', 'required|numeric|trim');
         $this->form_validation->set_rules('p_cat', 'Kategori', 'required');
 
         if ($this->form_validation->run() == false) {
@@ -68,7 +67,7 @@ class Home extends CI_Controller
                 'cat_id' => $this->input->post('p_cat'),
                 'beli' => $this->input->post('p_cost'),
                 'jual' => $this->input->post('p_sale'),
-                'stok' => $this->input->post('p_stock'),
+                'stok' => 0,
                 'is_active' => 1,
                 'date_created' => time()
             ];

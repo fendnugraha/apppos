@@ -1,11 +1,11 @@
+<div class="control-nav mb-3">
+    <a href="<?= base_url('home/addProduct'); ?>" class=" btn btn-primary">+ Tambah Produk</a>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCatProduct">
+        + Tambah Kategori
+    </button>
+</div>
 <div class="row">
     <div class="col-sm-8">
-        <div class="control-nav mb-3">
-            <a href="<?= base_url('home/addProduct'); ?>" class=" btn btn-primary">+ Tambah Produk</a>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCatProduct">
-                + Tambah Kategori
-            </button>
-        </div>
         <table class="table display">
             <thead>
                 <tr>

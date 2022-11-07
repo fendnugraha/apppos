@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="mb-2 row">
-                <label for="p_cat" class="col-sm col-form-label">Nama Produk</label>
+                <label for="p_cat" class="col-sm col-form-label">Kategori Produk</label>
                 <div class="col-sm-8">
                     <select class="form-control" name="p_cat" id="p_cat">
                         <option value="">- Pilih kategori -</option>
@@ -37,12 +37,6 @@
                 <label for="p_sale" class="col-sm col-form-label">Harga Jual</label>
                 <div class="col-sm-8">
                     <input type="number" class="form-control" name="p_sale" id="p_sale" value="<?= set_value('p_sale'); ?>">
-                </div>
-            </div>
-            <div class="mb-2 row">
-                <label for="p_stock" class="col-sm col-form-label">Stok</label>
-                <div class="col-sm-8">
-                    <input type="number" class="form-control" name="p_stock" id="p_stock" value="<?= set_value('p_stock'); ?>">
                 </div>
             </div>
             <div class="d-flex justify-content-between align-items-center">

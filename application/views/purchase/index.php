@@ -1,35 +1,41 @@
 <div class="control-nav mb-3">
-    <a href="<?= base_url('home/addProduct'); ?>" class=" btn btn-primary">+ Tambah Produk</a>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCatProduct">
-        + Tambah Kategori
+    <a href="<?= base_url('purchase/addPurchase'); ?>" class=" btn btn-primary">+ Tambah Pembelian</a>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addContact">
+        + Tambah Kontak
     </button>
 </div>
 <table class="table display">
     <thead>
         <tr>
-            <th>KODE</th>
-            <th>NAMA</th>
-            <th>KATEGORI</th>
-            <th>MODAL</th>
-            <th>JUAL</th>
-            <th>SISA</th>
-            <th>DETAIL</th>
+            <th>ID</th>
+            <th>WAKTU</th>
+            <th>SUPPLIER</th>
+            <th>PRODUK</th>
+            <th>HARGA</th>
+            <th>QTY</th>
+            <th>TOTAL</th>
+            <th>DIBUAT</th>
+            <th>STATUS</th>
+            <th>ACTION</th>
         </tr>
     </thead>
     <tbody>
         <?php
-        foreach ($product as $p) {
+        foreach ($purchase as $p) {
         ?>
             <tr>
-                <td><?= $p['kode']; ?></td>
-                <td><?= $p['nama']; ?></td>
-                <td><?= $p['category']; ?></td>
-                <td><?= $p['beli']; ?></td>
-                <td><?= $p['jual']; ?></td>
-                <td><?= $p['stok']; ?></td>
+                <td><?= $p['id']; ?></td>
+                <td><?= date('Y-m-d H:s', $p['waktu']); ?></td>
+                <td><?= $p['supplier']; ?></td>
+                <td><?= $p['product']; ?></td>
+                <td><?= $p['harga']; ?></td>
+                <td><?= $p['jumlah']; ?></td>
+                <td><?= $p['jumlah'] * $p['harga']; ?></td>
+                <td><?= date('Y-m-d H:s', $p['date_created']) . " by " . $p['username']; ?></td>
+                <td><?= $p['status']; ?></td>
                 <td>
-                    <a href="<?= base_url('home/edit_product/') . $p['inv_id'];; ?> ">Edit Produk</a>
-                    <a href="<?= base_url('home/pr_detail/') . $p['inv_id'];; ?> ">Detail</a>
+                    <a href="<?= base_url('purchase/edit_purchase/') . $p['id'];; ?> ">Edit</a>
+                    <a href="<?= base_url('purchase/po_detail/') . $p['id'];; ?> ">Detail</a>
                 </td>
             </tr>
         <?php }; ?>
@@ -40,7 +46,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="addCatProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addContact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -48,17 +54,28 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="<?= base_url('home/addCatProduct'); ?>" method="post">
+                <form action="<?= base_url('purchase'); ?>" method="post">
                     <div class="mb-1 row">
-                        <label for="catname" class="col-sm col-form-label">Nama Kategori</label>
+                        <label for="ct_name" class="col-sm col-form-label">Nama Kontak</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="catname" id="catname" value="<?= set_value('catname'); ?>">
+                            <input type="text" class="form-control" name="ct_name" id="ct_name" value="<?= set_value('ct_name'); ?>">
+                            <div class="form-text">Maksimal 60 Karakter</div>
                         </div>
                     </div>
                     <div class="mb-1 row">
-                        <label for="catprefix" class="col-sm col-form-label">Kode Prefix</label>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" name="catprefix" id="catprefix" value="<?= set_value('catprefix'); ?>">
+                        <label for="catprefix" class="col-sm col-form-label">Type</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" name="ct_type" id="ct_type">
+                                <option value="Konsumen">Konsumen</option>
+                                <option value="Supplier">Supplier</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-1 row">
+                        <label for="ct_desc" class="col-sm col-form-label">Deskripsi</label>
+                        <div class="col-sm-8">
+                            <textarea type="text" class="form-control" name="ct_desc" id="ct_desc" value="<?= set_value('ct_desc'); ?>">
+                            </textarea>
                         </div>
                     </div>
             </div>
