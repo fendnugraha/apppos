@@ -5,7 +5,7 @@
     </button>
 </div>
 <table class="table display">
-    <thead>
+    <thead class="thead-dark">
         <tr>
             <th>ID</th>
             <th>WAKTU</th>
@@ -19,20 +19,23 @@
             <th>ACTION</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="table-group-divider">
         <?php
         foreach ($purchase as $p) {
+            if ($p['status'] == 1) {
+                $status = "<span class='badge rounded-pill text-bg-success'>success</span>";
+            };
         ?>
             <tr>
                 <td><?= $p['id']; ?></td>
-                <td><?= date('Y-m-d H:s', $p['waktu']); ?></td>
+                <td><?= $p['waktu']; ?></td>
                 <td><?= $p['supplier']; ?></td>
                 <td><?= $p['product']; ?></td>
                 <td><?= $p['harga']; ?></td>
                 <td><?= $p['jumlah']; ?></td>
                 <td><?= $p['jumlah'] * $p['harga']; ?></td>
                 <td><?= date('Y-m-d H:s', $p['date_created']) . " by " . $p['username']; ?></td>
-                <td><?= $p['status']; ?></td>
+                <td><?= $status; ?></td>
                 <td>
                     <a href="<?= base_url('purchase/edit_purchase/') . $p['id'];; ?> ">Edit</a>
                     <a href="<?= base_url('purchase/po_detail/') . $p['id'];; ?> ">Detail</a>

@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="mb-2 row">
-                <label for="p_stock" class="col-sm col-form-label">Harga Jual</label>
+                <label for="p_stock" class="col-sm col-form-label">Sisa Stok</label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" name="p_stock" id="p_stock" value="<?= $product['stok']; ?>" readonly>
                 </div>

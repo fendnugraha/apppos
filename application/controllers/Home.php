@@ -96,7 +96,7 @@ class Home extends CI_Controller
         $this->form_validation->set_rules('p_cat', 'Kategori', 'required');
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = 'Dashboard - Product Detail - ' . $data['product']['nama'];
+            $data['title'] = 'Dashboard - Edit Detail - ' . $data['product']['nama'];
             $this->load->view('include/header', $data);
             $this->load->view('home/edit_product', $data);
             $this->load->view('include/footer');
