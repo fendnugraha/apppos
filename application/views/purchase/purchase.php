@@ -55,5 +55,6 @@
     </div>
     <div class="info-addproduct col-sm">
         <?php echo validation_errors(); ?>
+        <?= $this->session->flashdata('message'); ?>
     </div>
 </div>

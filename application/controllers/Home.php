@@ -69,7 +69,7 @@ class Home extends CI_Controller
                 'jual' => $this->input->post('p_sale'),
                 'stok' => 0,
                 'is_active' => 1,
-                'date_created' => time()
+                'date_modified' => time()
             ];
             $this->db->insert('inventory', $data);
             redirect('home/addProduct');

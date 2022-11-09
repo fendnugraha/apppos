@@ -5,7 +5,7 @@
     </button>
 </div>
 <div class="row">
-    <div class="col-sm-8">
+    <div class="col-sm-9">
         <table class="table display">
             <thead>
                 <tr>
@@ -15,6 +15,7 @@
                     <th>MODAL</th>
                     <th>JUAL</th>
                     <th>SISA</th>
+                    <th>UPDATE TERAKHIR</th>
                     <th>DETAIL</th>
                 </tr>
             </thead>
@@ -29,6 +30,7 @@
                         <td><?= $p['beli']; ?></td>
                         <td><?= $p['jual']; ?></td>
                         <td><?= $p['stok']; ?></td>
+                        <td><?= date('Y-m-d H:s', $p['date_modified']); ?></td>
                         <td>
                             <a href="<?= base_url('home/edit_product/') . $p['inv_id'];; ?> ">Edit Produk</a>
                             <a href="<?= base_url('home/pr_detail/') . $p['inv_id'];; ?> ">Detail</a>

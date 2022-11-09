@@ -21,7 +21,7 @@
     </thead>
     <tbody class="table-group-divider">
         <?php
-        foreach ($purchase as $p) {
+        foreach ($product_trace as $p) {
             if ($p['status'] == 1) {
                 $status = "<span class='badge rounded-pill text-bg-success'>success</span>";
             };
@@ -31,9 +31,9 @@
                 <td><?= $p['waktu']; ?></td>
                 <td><?= $p['supplier']; ?></td>
                 <td><?= $p['product']; ?></td>
-                <td><?= $p['harga']; ?></td>
-                <td><?= $p['jumlah']; ?></td>
-                <td><?= $p['jumlah'] * $p['harga']; ?></td>
+                <td><?= $p['price']; ?></td>
+                <td><?= $p['purchases']; ?></td>
+                <td><?= $p['purchases'] * $p['price']; ?></td>
                 <td><?= date('Y-m-d H:s', $p['date_created']) . " by " . $p['username']; ?></td>
                 <td><?= $status; ?></td>
                 <td>

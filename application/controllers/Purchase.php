@@ -17,7 +17,7 @@ class Purchase extends CI_Controller
         $this->db->join('contact b', 'b.id = a.contact_id', 'left');
         $this->db->join('inventory c', 'c.id = a.product_id', 'left');
         $this->db->join('user d', 'd.id = a.user_id', 'left');
-        $data['purchase'] = $this->db->get('purchase a')->result_array();
+        $data['product_trace'] = $this->db->get('product_trace a')->result_array();
 
         $data['title'] = 'Pembelian';
         $this->load->view('include/header', $data);
@@ -43,32 +43,42 @@ class Purchase extends CI_Controller
             $this->load->view('purchase/purchase', $data);
             $this->load->view('include/footer');
         } else {
-            $sisa_stok = $this->db->select('stok')->get_where('inventory', ['id' => $this->input->post('p_id')])->row_array();
-            $update_stok = $sisa_stok['stok'] + $this->input->post('p_qty');
 
             $data = [
                 'id' => null,
                 'waktu' => $this->input->post('p_date'),
                 'contact_id' => $this->input->post('p_sup'),
                 'product_id' => $this->input->post('p_id'),
-                'harga' => $this->input->post('p_price'),
-                'jumlah' => $this->input->post('p_qty'),
-                'user_id' => $user_id,
+                'purchases' => $this->input->post('p_qty'),
+                'sales' => 0,
+                'price' => $this->input->post('p_price'),
+                'status' => 1,
                 'date_created' => time(),
-                'status' => 1
+                'user_id' => $user_id,
             ];
 
             $this->db->trans_begin();
 
-            $this->db->insert('purchase', $data);
-            $this->db->update('inventory', ['stok' => $update_stok], ['id' => $this->input->post('p_id')]);
+            $this->db->insert('product_trace', $data);
+
+
 
             if ($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
             } else {
                 $this->db->trans_commit();
+
+                $p_id = $this->input->post('p_id');
+                $sisa_stok = $this->db->query("SELECT sum(purchases-sales) as stok FROM product_trace WHERE product_id = '$p_id'")->row_array();
+                $update_stok = $sisa_stok['stok'];
                 $update_cost = $this->purchase_model->updateCost($this->input->post('p_id'));
-                $this->db->update('inventory', ['beli' => $update_cost], ['id' => $this->input->post('p_id')]);
+
+                $this->db->update('inventory', ['stok' => $update_stok, 'beli' => $update_cost, 'date_modified' => time()], ['id' => $this->input->post('p_id')]);
+
+                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> Pembelian barang berhasil ditambahkan.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>');
             }
             redirect('purchase/addPurchase');
         }
@@ -95,8 +105,6 @@ class Purchase extends CI_Controller
             $this->load->view('purchase/edit_purchase', $data);
             $this->load->view('include/footer');
         } else {
-            $sisa_stok = $this->db->select('stok')->get_where('inventory', ['id' => $this->input->post('p_id')])->row_array();
-            $update_stok = $sisa_stok['stok'] + $this->input->post('p_qty');
 
             $data = [
                 'waktu' => $this->input->post('p_date'),
@@ -110,6 +118,9 @@ class Purchase extends CI_Controller
             ];
 
             $this->db->trans_begin();
+
+            $sisa_stok = $this->db->select('stok')->get_where('inventory', ['id' => $this->input->post('p_id')])->row_array();
+            $update_stok = $sisa_stok['stok'] + $this->input->post('p_qty');
 
             $this->db->update('purchase', $data, ['id' => $po_id]);
             $this->db->update('inventory', ['stok' => $update_stok], ['id' => $this->input->post('p_id')]);
