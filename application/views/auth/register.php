@@ -55,7 +55,7 @@
                     <label for="role" class="col-sm col-form-label">Role</label>
                     <div class="col-sm-8">
                         <select name="role" class="form-control" id="role">
-                            <option value="1">Administrator</option>
+                            <!-- <option value="1">Administrator</option> -->
                             <option value="2">Kasir</option>
                             <option value="3">Staff</option>
                         </select>

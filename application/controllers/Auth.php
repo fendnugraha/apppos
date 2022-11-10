@@ -104,4 +104,9 @@ class Auth extends CI_Controller
         $this->load->view('auth/register_success');
         $this->load->view('include/footer');
     }
+
+    public function error404()
+    {
+        $this->load->view('auth/error404');
+    }
 }

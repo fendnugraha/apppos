@@ -1,5 +1,5 @@
 <div class="control-nav mb-3">
-    <a href="<?= base_url('purchase/addPurchase'); ?>" class=" btn btn-primary">+ Tambah Pembelian</a>
+    <a href="<?= base_url('sales/addSales'); ?>" class=" btn btn-primary">+ Tambah Pembelian</a>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addContact">
         + Tambah Kontak
     </button>
@@ -9,11 +9,12 @@
         <tr>
             <th>ID</th>
             <th>WAKTU</th>
-            <th>SUPPLIER</th>
+            <th>KONSUMEN</th>
             <th>PRODUK</th>
             <th>HARGA</th>
             <th>QTY</th>
             <th>TOTAL</th>
+            <th>LABA</th>
             <th>DIBUAT</th>
             <th>STATUS</th>
             <th>ACTION</th>
@@ -34,21 +35,24 @@
                 <td><?= $p['supplier']; ?></td>
                 <td><?= $p['product']; ?></td>
                 <td><?= $p['price']; ?></td>
-                <td><?= $p['purchases']; ?></td>
-                <td><?= $p['purchases'] * $p['price']; ?></td>
+                <td><?= $p['sales']; ?></td>
+                <td><?= $p['sales'] * $p['price']; ?></td>
+                <td class="text-end"><?= number_format(($p['sales'] * $p['price']) - ($p['sales'] * $p['cost'])); ?></td>
                 <td><?= date('Y-m-d H:s', $p['date_created']) . " by " . $p['username']; ?></td>
                 <td><?= $status; ?></td>
                 <td>
-                    <a href="<?= base_url('purchase/edit_purchase/') . $p['id'];; ?> ">Edit</a>
-                    <a href="<?= base_url('purchase/po_detail/') . $p['id'];; ?> ">Detail</a>
+                    <a href="<?= base_url('sales/edit_sales/') . $p['id'];; ?> ">Edit</a>
+                    <a href="<?= base_url('sales/po_detail/') . $p['id'];; ?> ">Detail</a>
                 </td>
             </tr>
         <?php }; ?>
     </tbody>
 
 </table>
-<p>Total Pembelian</p>
-<h1>Rp <?= number_format($total_po['total']); ?> ,-</h1>
+<p>Total Penjualan</p>
+<h1>Rp <?= number_format($total_so['total']); ?> ,-</h1>
+<p>Total Keuntungan</p>
+<h1>Rp <?= number_format($laba['laba']); ?> ,-</h1>
 
 
 
@@ -61,7 +65,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="<?= base_url('purchase'); ?>" method="post">
+                <form action="<?= base_url('sales'); ?>" method="post">
                     <div class="mb-1 row">
                         <label for="ct_name" class="col-sm col-form-label">Nama Kontak</label>
                         <div class="col-sm-8">

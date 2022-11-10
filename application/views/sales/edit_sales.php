@@ -1,27 +1,27 @@
 <div class="row">
     <div class="form-addproduct col-sm">
-        <form action="<?= base_url('purchase/edit_purchase/' . $purchase['id']); ?>" method="post">
+        <form action="<?= base_url('sales/edit_sales/' . $sales['id']); ?>" method="post">
             <div class="mb-2 row">
                 <label for="po_id" class="col-sm col-form-label">ID</label>
                 <div class="col-sm-3 me-auto">
-                    <input type="text" class="form-control" name="po_id" id="po_id" value="<?= $purchase['id']; ?>" readonly>
+                    <input type="text" class="form-control" name="po_id" id="po_id" value="<?= $sales['id']; ?>" readonly>
                 </div>
             </div>
             <div class="mb-2 row">
                 <label for="p_date" class="col-sm col-form-label">Tanggal</label>
                 <div class="col-sm-8">
-                    <input type="datetime-local" class="form-control" name="p_date" id="p_date" value="<?= $purchase['waktu']; ?>">
+                    <input type="datetime-local" class="form-control" name="p_date" id="p_date" value="<?= $sales['waktu']; ?>">
                 </div>
             </div>
             <div class="mb-2 row">
-                <label for="p_sup" class="col-sm col-form-label">Supplier</label>
+                <label for="p_sup" class="col-sm col-form-label">Konsumen</label>
                 <div class="col-sm-8">
                     <select class="form-control" name="p_sup" id="p_sup">
                         <option value="">- Pilih Supplier -</option>
                         <?php
                         foreach ($contact as $c) {
                         ?>
-                            <option value="<?= $c['id']; ?>" <?php if ($purchase['contact_id'] == $c['id']) {
+                            <option value="<?= $c['id']; ?>" <?php if ($sales['contact_id'] == $c['id']) {
                                                                     echo "selected";
                                                                 }; ?>><?= $c['nama']; ?></option>
                         <?php
@@ -37,7 +37,7 @@
                         <?php
                         foreach ($product as $p) {
                         ?>
-                            <option value="<?= $p['id']; ?>" <?php if ($purchase['product_id'] == $p['id']) {
+                            <option value="<?= $p['id']; ?>" <?php if ($sales['product_id'] == $p['id']) {
                                                                     echo "selected";
                                                                 }; ?>><?= $p['nama'] . " - " . $p['kode']; ?></option>
                         <?php
@@ -48,13 +48,13 @@
             <div class="mb-2 row">
                 <label for="p_qty" class="col-sm col-form-label">Jumlah (Pcs)</label>
                 <div class="col-sm-3 me-auto">
-                    <input type="number" class="form-control" name="p_qty" id="p_qty" value="<?= $purchase['purchases']; ?>" placeholder="Qty">
+                    <input type="number" class="form-control" name="p_qty" id="p_qty" value="<?= $sales['sales']; ?>" placeholder="Qty">
                 </div>
             </div>
             <div class="mb-2 row">
                 <label for="p_price" class="col-sm col-form-label">Harga (Rp)</label>
                 <div class="col-sm-8">
-                    <input type="number" class="form-control" name="p_price" id="p_price" value="<?= $purchase['price']; ?>" placeholder="Harga">
+                    <input type="number" class="form-control" name="p_price" id="p_price" value="<?= $sales['price']; ?>" placeholder="Harga">
                 </div>
             </div>
             <div class="mb-2 row">
@@ -64,7 +64,7 @@
                         <?php
                         foreach ($status as $s) {
                         ?>
-                            <option value="<?= $s['id']; ?>" <?php if ($purchase['status'] == $s['id']) {
+                            <option value="<?= $s['id']; ?>" <?php if ($sales['status'] == $s['id']) {
                                                                     echo "selected";
                                                                 }; ?>><?= $s['id'] . " - " . $s['status']; ?></option>
                         <?php
@@ -74,7 +74,7 @@
             </div>
             <div class="d-flex justify-content-between align-items-center">
                 <button type="submit" class="btn btn-success">Update</button>
-                <a href="<?= base_url('purchase'); ?>">Kembali</a>
+                <a href="<?= base_url('sales'); ?>">Kembali</a>
             </div>
         </form>
     </div>

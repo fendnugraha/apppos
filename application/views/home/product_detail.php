@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <td>Dibuat Tanggal Stok</td>
-                    <td><?= date('Y-m-d H:m:s', $product['date_created']); ?></td>
+                    <td><?= date('Y-m-d H:m:s', $product['date_modified']); ?></td>
                 </tr>
             </tbody>
         </table>

@@ -4,7 +4,7 @@
             <div class="mb-2 row">
                 <label for="p_date" class="col-sm col-form-label">Tanggal</label>
                 <div class="col-sm-8">
-                    <input type="datetime-local" class="form-control" name="p_date" id="p_date" value="<?= set_value('p_date'); ?>">
+                    <input type="datetime-local" class="form-control" name="p_date" id="p_date" value="<?= date('Y-m-d H:i'); ?>">
                 </div>
             </div>
             <div class="mb-2 row">
