@@ -7,16 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App POS</title>
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/datatables.min.css">
+    <!-- <link rel="stylesheet" href="<?= base_url(); ?>assets/css/datatables.min.css"> -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/dataTables.jqueryui.min.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/all.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/fontawesome.min.css">
+    <!-- <link rel="stylesheet" href="<?= base_url(); ?>assets/css/dataTables.jqueryui.min.css"> -->
+    <!-- <link rel="stylesheet" href="<?= base_url(); ?>assets/css/jquery.dataTables.min.css"> -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/mycss.css">
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="#">AppPOS</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,21 +42,17 @@
                         <a class="nav-link" href="<?= base_url('setting'); ?>">Setting</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('auth/logout'); ?>">Logout <?= $this->session->userdata('fullname'); ?></a>
+                        <a class="nav-link text-warning active" href="#">Sign as <?= $this->session->userdata('fullname'); ?></a>
                     </li>
                 </ul>
+            </div>
+            <div class="d-flex">
+                <a class="nav-link text-light text-username" href="<?= base_url('auth/logout'); ?>">Logout</a>
             </div>
         </div>
 
     </nav>
     <div class="container d-flex justify-content-between align-items-center mt-3">
-        <h1><?= $title; ?></h1>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page"><?= $title; ?></li>
-            </ol>
-        </nav>
+        <h2><?= $title; ?></h2>
     </div>
     <div class="container mt-3">
-        <div class="card card-content">
-            <div class="card-body">

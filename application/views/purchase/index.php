@@ -1,54 +1,76 @@
-<div class="control-nav mb-3">
-    <a href="<?= base_url('purchase/addPurchase'); ?>" class=" btn btn-primary">+ Tambah Pembelian</a>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addContact">
-        + Tambah Kontak
-    </button>
-</div>
-<table class="table display">
-    <thead class="thead-dark">
-        <tr>
-            <th>ID</th>
-            <th>WAKTU</th>
-            <th>SUPPLIER</th>
-            <th>PRODUK</th>
-            <th>HARGA</th>
-            <th>QTY</th>
-            <th>TOTAL</th>
-            <th>DIBUAT</th>
-            <th>STATUS</th>
-            <th>ACTION</th>
-        </tr>
-    </thead>
-    <tbody class="table-group-divider">
-        <?php
-        foreach ($product_trace as $p) {
-            if ($p['status'] == 1) {
-                $status = "<span class='badge rounded-pill text-bg-success'>success</span>";
-            } elseif ($p['status'] == 2) {
-                $status = "<span class='badge rounded-pill text-bg-danger'>void</span>";
-            };
-        ?>
-            <tr>
-                <td><?= $p['id']; ?></td>
-                <td><?= $p['waktu']; ?></td>
-                <td><?= $p['supplier']; ?></td>
-                <td><?= $p['product']; ?></td>
-                <td><?= $p['price']; ?></td>
-                <td><?= $p['purchases']; ?></td>
-                <td><?= $p['purchases'] * $p['price']; ?></td>
-                <td><?= date('Y-m-d H:s', $p['date_created']) . " by " . $p['username']; ?></td>
-                <td><?= $status; ?></td>
-                <td>
-                    <a href="<?= base_url('purchase/edit_purchase/') . $p['id'];; ?> ">Edit</a>
-                    <a href="<?= base_url('purchase/po_detail/') . $p['id'];; ?> ">Detail</a>
-                </td>
-            </tr>
-        <?php }; ?>
-    </tbody>
+<div class="row mb-3">
+    <div class="col-sm">
+        <div class="card bg-primary text-bg-dark">
+            <div class="card-body">
+                <p>Total Inventory</p>
+                <h1>Rp <?= number_format($total_inv['total_inv']); ?> ,-</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="card bg-info text-bg-light">
+            <div class="card-body">
+                <p>Total Pembelian</p>
+                <h1>Rp <?= number_format($total_po['total']); ?> ,-</h1>
 
-</table>
-<p>Total Pembelian</p>
-<h1>Rp <?= number_format($total_po['total']); ?> ,-</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="control-nav mb-3">
+            <a href="<?= base_url('purchase/addPurchase'); ?>" class=" btn btn-primary">+ Tambah Pembelian</a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addContact">
+                + Tambah Kontak
+            </button>
+        </div>
+        <table class="table display">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>WAKTU</th>
+                    <th>SUPPLIER</th>
+                    <th>PRODUK</th>
+                    <th>HARGA</th>
+                    <th>QTY</th>
+                    <th>TOTAL</th>
+                    <th>DIBUAT</th>
+                    <th>STATUS</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <?php
+                foreach ($product_trace as $p) {
+                    if ($p['status'] == 1) {
+                        $status = "<span class='badge rounded-pill text-bg-success'>success</span>";
+                    } elseif ($p['status'] == 2) {
+                        $status = "<span class='badge rounded-pill text-bg-danger'>void</span>";
+                    };
+                ?>
+                    <tr>
+                        <td><?= $p['id']; ?></td>
+                        <td><?= $p['waktu']; ?></td>
+                        <td><?= $p['supplier']; ?></td>
+                        <td><?= $p['product']; ?></td>
+                        <td><?= $p['price']; ?></td>
+                        <td><?= $p['purchases']; ?></td>
+                        <td><?= $p['purchases'] * $p['price']; ?></td>
+                        <td><?= date('Y-m-d H:s', $p['date_created']) . " by " . $p['username']; ?></td>
+                        <td><?= $status; ?></td>
+                        <td>
+                            <a href="<?= base_url('purchase/edit_purchase/') . $p['id'];; ?> ">Edit</a>
+                            <a href="<?= base_url('purchase/po_detail/') . $p['id'];; ?> ">Detail</a>
+                        </td>
+                    </tr>
+                <?php }; ?>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
 
 
 

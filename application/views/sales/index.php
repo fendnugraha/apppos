@@ -1,58 +1,78 @@
-<div class="control-nav mb-3">
-    <a href="<?= base_url('sales/addSales'); ?>" class=" btn btn-primary">+ Tambah Pembelian</a>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addContact">
-        + Tambah Kontak
-    </button>
-</div>
-<table class="table display">
-    <thead class="thead-dark">
-        <tr>
-            <th>ID</th>
-            <th>WAKTU</th>
-            <th>KONSUMEN</th>
-            <th>PRODUK</th>
-            <th>HARGA</th>
-            <th>QTY</th>
-            <th>TOTAL</th>
-            <th>LABA</th>
-            <th>DIBUAT</th>
-            <th>STATUS</th>
-            <th>ACTION</th>
-        </tr>
-    </thead>
-    <tbody class="table-group-divider">
-        <?php
-        foreach ($product_trace as $p) {
-            if ($p['status'] == 1) {
-                $status = "<span class='badge rounded-pill text-bg-success'>success</span>";
-            } elseif ($p['status'] == 2) {
-                $status = "<span class='badge rounded-pill text-bg-danger'>void</span>";
-            };
-        ?>
-            <tr>
-                <td><?= $p['id']; ?></td>
-                <td><?= $p['waktu']; ?></td>
-                <td><?= $p['supplier']; ?></td>
-                <td><?= $p['product']; ?></td>
-                <td><?= $p['price']; ?></td>
-                <td><?= $p['sales']; ?></td>
-                <td><?= $p['sales'] * $p['price']; ?></td>
-                <td class="text-end"><?= number_format(($p['sales'] * $p['price']) - ($p['sales'] * $p['cost'])); ?></td>
-                <td><?= date('Y-m-d H:s', $p['date_created']) . " by " . $p['username']; ?></td>
-                <td><?= $status; ?></td>
-                <td>
-                    <a href="<?= base_url('sales/edit_sales/') . $p['id'];; ?> ">Edit</a>
-                    <a href="<?= base_url('sales/po_detail/') . $p['id'];; ?> ">Detail</a>
-                </td>
-            </tr>
-        <?php }; ?>
-    </tbody>
+<div class="row mb-3">
+    <div class="col-sm">
+        <div class="card bg-warning text-bg-light">
+            <div class="card-body">
+                <p>Total Pendapatan</p>
+                <h1><i class="fas fa-cash-register"></i> <?= number_format($total_so['total']); ?> ,-</h1>
 
-</table>
-<p>Total Penjualan</p>
-<h1>Rp <?= number_format($total_so['total']); ?> ,-</h1>
-<p>Total Keuntungan</p>
-<h1>Rp <?= number_format($laba['laba']); ?> ,-</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="card bg-success text-bg-dark">
+            <div class="card-body">
+                <p>Total Keuntungan</p>
+                <h1>Rp <?= number_format($laba['laba']); ?> ,-</h1>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="control-nav mb-3">
+            <a href="<?= base_url('sales/addSales'); ?>" class=" btn btn-primary">+ Tambah Pembelian</a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addContact">
+                + Tambah Kontak
+            </button>
+        </div>
+        <table class="table display">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>WAKTU</th>
+                    <th>KONSUMEN</th>
+                    <th>PRODUK</th>
+                    <th>HARGA</th>
+                    <th>QTY</th>
+                    <th>TOTAL</th>
+                    <th>LABA</th>
+                    <th>DIBUAT</th>
+                    <th>STATUS</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <?php
+                foreach ($product_trace as $p) {
+                    if ($p['status'] == 1) {
+                        $status = "<span class='badge rounded-pill text-bg-success'>success</span>";
+                    } elseif ($p['status'] == 2) {
+                        $status = "<span class='badge rounded-pill text-bg-danger'>void</span>";
+                    };
+                ?>
+                    <tr>
+                        <td><?= $p['id']; ?></td>
+                        <td><?= $p['waktu']; ?></td>
+                        <td><?= $p['supplier']; ?></td>
+                        <td><?= $p['product']; ?></td>
+                        <td><?= $p['price']; ?></td>
+                        <td><?= $p['sales']; ?></td>
+                        <td><?= $p['sales'] * $p['price']; ?></td>
+                        <td class="text-end"><?= number_format(($p['sales'] * $p['price']) - ($p['sales'] * $p['cost'])); ?></td>
+                        <td><?= date('Y-m-d H:s', $p['date_created']) . " by " . $p['username']; ?></td>
+                        <td><?= $status; ?></td>
+                        <td>
+                            <a href="<?= base_url('sales/edit_sales/') . $p['id'];; ?> ">Edit</a>
+                            <a href="<?= base_url('sales/po_detail/') . $p['id'];; ?> ">Detail</a>
+                        </td>
+                    </tr>
+                <?php }; ?>
+            </tbody>
+
+        </table>
+    </div>
+</div>
 
 
 

@@ -1,11 +1,28 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;800;900&display=swap");
 * {
   font-family: "Nunito", sans-serif;
-  font-size: 0.5rem;
+  font-size: 0.7rem;
+}
+
+body {
+  background-color: rgb(245, 245, 245);
+}
+
+.card {
+  border-radius: 1.5rem;
+  padding: 0.5rem 0 0.5rem 0;
+  border: none;
 }
 
 @media (min-width: 992px) {
   .navbar {
     height: 30px;
+    background-color: rgb(31, 31, 134);
+  }
+  .navbar .container .collapse ul.navbar-nav li.nav-item a.nav-link {
+    font-size: 1.1rem;
+  }
+  .navbar .container a.text-username {
+    font-size: 1.1rem;
   }
 }/*# sourceMappingURL=mycss.css.map */

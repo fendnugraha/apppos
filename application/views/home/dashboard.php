@@ -1,13 +1,42 @@
-<div class="control-nav mb-3">
-    <a href="<?= base_url('home/addProduct'); ?>" class=" btn btn-primary">+ Tambah Produk</a>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCatProduct">
-        + Tambah Kategori
-    </button>
+<div class="row mb-3">
+    <div class="col-sm">
+        <div class="card bg-primary text-bg-dark">
+            <div class="card-body">
+                <p>Total Inventory</p>
+                <h1>Rp <?= number_format($total_inv['total_inv']); ?> ,-</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="card bg-warning text-bg-light">
+            <div class="card-body">
+                <p>Total Pendapatan</p>
+                <h1><i class="fas fa-cash-register"></i> <?= number_format($total_so['total']); ?> ,-</h1>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="card bg-success text-bg-dark">
+            <div class="card-body">
+                <p>Total Keuntungan</p>
+                <h1>Rp <?= number_format($laba['laba']); ?> ,-</h1>
+
+            </div>
+        </div>
+    </div>
 </div>
-<div class="row">
-    <div class="col-sm-9">
-        <table class="table display">
-            <thead>
+
+<div class="card">
+    <div class="card-body">
+        <div class="control-nav mb-3">
+            <a href="<?= base_url('home/addProduct'); ?>" class=" btn btn-primary">+ Tambah Produk</a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCatProduct">
+                + Tambah Kategori
+            </button>
+        </div>
+        <table class="table display table-striped">
+            <thead class="table-light">
                 <tr>
                     <th>KODE</th>
                     <th>NAMA</th>
@@ -19,7 +48,7 @@
                     <th>DETAIL</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
                 <?php
                 foreach ($product as $p) {
                 ?>
@@ -41,15 +70,7 @@
 
         </table>
     </div>
-    <div class="col-sm">
-        <div class="card">
-            <div class="card-body">
-                <p>Total Inventory</p>
-                <h1>Rp <?= number_format($total_inv['total_inv']); ?> ,-</h1>
-
-            </div>
-        </div>
-    </div>
+</div>
 </div>
 
 

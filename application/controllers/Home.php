@@ -16,6 +16,8 @@ class Home extends CI_Controller
         $data['product'] = $this->db->query('SELECT *, inventory.id as inv_id FROM inventory JOIN product_cat ON product_cat.id = inventory.cat_id')->result_array();
 
         $data['total_inv'] = $this->db->query('SELECT sum(beli*stok) as total_inv FROM inventory')->row_array();
+        $data['total_so'] = $this->db->query("SELECT sum(sales*price) as total FROM product_trace WHERE status = 1")->row_array();
+        $data['laba'] = $this->db->query("SELECT sum((price*sales)-(cost*sales)) as laba FROM product_trace WHERE status = 1;")->row_array();
 
         $data['title'] = 'Dashboard';
         $this->load->view('include/header', $data);
@@ -79,6 +81,12 @@ class Home extends CI_Controller
     public function pr_detail($pr_id)
     {
         $data['product'] = $this->db->query("SELECT *, inventory.id as inv_id FROM inventory JOIN product_cat ON product_cat.id = inventory.cat_id WHERE inventory.id = '$pr_id'")->row_array();
+
+        $this->db->select('a.*, b.nama as supplier, c.nama as product, d.username');
+        $this->db->join('contact b', 'b.id = a.contact_id', 'left');
+        $this->db->join('inventory c', 'c.id = a.product_id', 'left');
+        $this->db->join('user d', 'd.id = a.user_id', 'left');
+        $data['product_trace'] = $this->db->get_where('product_trace a', ['product_id' => $pr_id])->result_array();
 
         $data['title'] = 'Dashboard - Product Detail - ' . $data['product']['nama'];
         $this->load->view('include/header', $data);

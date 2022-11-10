@@ -20,6 +20,7 @@ class Purchase extends CI_Controller
         $data['product_trace'] = $this->db->get_where('product_trace a', ['purchases >' => 0])->result_array();
 
         $data['total_po'] = $this->db->query("SELECT sum(purchases*price) as total FROM product_trace WHERE status = 1")->row_array();
+        $data['total_inv'] = $this->db->query('SELECT sum(beli*stok) as total_inv FROM inventory')->row_array();
 
         $data['title'] = 'Pembelian';
         $this->load->view('include/header', $data);
