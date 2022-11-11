@@ -12,7 +12,7 @@
         <div class="card bg-success text-bg-dark">
             <div class="card-body">
                 <p>Total Keuntungan</p>
-                <h1>Rp <?= number_format($laba['laba']); ?> ,-</h1>
+                <h1><i class="fa-solid fa-sack-dollar"></i> <?= number_format($laba['laba']); ?> ,-</h1>
 
             </div>
         </div>
@@ -21,7 +21,7 @@
 <div class="card">
     <div class="card-body">
         <div class="control-nav mb-3">
-            <a href="<?= base_url('sales/addSales'); ?>" class=" btn btn-primary">+ Tambah Pembelian</a>
+            <a href="<?= base_url('sales/addSales'); ?>" class=" btn btn-primary"><i class="fa-solid fa-cart-plus"></i> | Tambah Penjualan</a>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addContact">
                 + Tambah Kontak
             </button>

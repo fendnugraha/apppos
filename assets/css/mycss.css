@@ -1,11 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;800;900&display=swap");
 * {
   font-family: "Nunito", sans-serif;
-  font-size: 0.7rem;
 }
 
 body {
   background-color: rgb(245, 245, 245);
+}
+
+nav.navbar ul li {
+  font-size: 0.9rem;
+}
+
+a.setting-link {
+  text-decoration: none;
+  color: black;
 }
 
 .card {
@@ -14,13 +22,31 @@ body {
   border: none;
 }
 
+.card.card-page-title,
+.card.card-setting-menu {
+  padding: 15px;
+}
+.card.card-page-title p,
+.card.card-page-title h4,
+.card.card-setting-menu p,
+.card.card-setting-menu h4 {
+  margin: 0;
+}
+
+table,
+tr,
+td,
+th {
+  font-size: 0.7rem;
+}
+
 @media (min-width: 992px) {
   .navbar {
-    height: 30px;
+    height: 35px;
     background-color: rgb(31, 31, 134);
   }
   .navbar .container .collapse ul.navbar-nav li.nav-item a.nav-link {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
   .navbar .container a.text-username {
     font-size: 1.1rem;

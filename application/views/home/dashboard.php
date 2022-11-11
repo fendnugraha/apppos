@@ -3,7 +3,7 @@
         <div class="card bg-primary text-bg-dark">
             <div class="card-body">
                 <p>Total Inventory</p>
-                <h1>Rp <?= number_format($total_inv['total_inv']); ?> ,-</h1>
+                <h1><i class="fa-solid fa-warehouse"></i> <?= number_format($total_inv['total_inv']); ?> ,-</h1>
             </div>
         </div>
     </div>
@@ -20,7 +20,7 @@
         <div class="card bg-success text-bg-dark">
             <div class="card-body">
                 <p>Total Keuntungan</p>
-                <h1>Rp <?= number_format($laba['laba']); ?> ,-</h1>
+                <h1><i class="fa-solid fa-sack-dollar"></i> <?= number_format($laba['laba']); ?> ,-</h1>
 
             </div>
         </div>

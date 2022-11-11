@@ -13,8 +13,6 @@ class Setting extends CI_Controller
 
     public function index()
     {
-        $data['contact'] = $this->db->get('contact')->result_array();
-
         $data['title'] = 'Setting';
         $this->load->view('include/header', $data);
         $this->load->view('setting/index', $data);

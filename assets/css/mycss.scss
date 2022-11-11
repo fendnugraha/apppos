@@ -2,11 +2,25 @@
 
 * {
     font-family: 'Nunito', sans-serif;
-    font-size: 0.7rem;
+    // font-size: 0.7rem;
 }
+
 
 body {
     background-color: rgb(245, 245, 245);
+}
+
+nav.navbar {
+    ul {
+        li {
+            font-size: 0.9rem;
+        }
+    }
+}
+
+a.setting-link {
+    text-decoration: none;
+    color: black;
 }
 
 .card {
@@ -15,9 +29,26 @@ body {
     border: none;
 }
 
+.card.card-page-title,
+.card.card-setting-menu {
+    padding: 15px;
+
+    p,
+    h4 {
+        margin: 0;
+    }
+}
+
+table,
+tr,
+td,
+th {
+    font-size: 0.7rem;
+}
+
 @media (min-width: 992px) {
     .navbar {
-        height: 30px;
+        height: 35px;
         background-color: rgb(31, 31, 134);
 
         .container {
@@ -25,7 +56,7 @@ body {
                 ul.navbar-nav {
                     li.nav-item {
                         a.nav-link {
-                            font-size: 1.1rem;
+                            font-size: 1rem;
                         }
                     }
                 }

@@ -52,7 +52,9 @@
         </div>
 
     </nav>
-    <div class="container d-flex justify-content-between align-items-center mt-3">
-        <h2><?= $title; ?></h2>
+    <div class="container mt-3">
+        <div class="card card-page-title">
+            <p><?= $title; ?></p>
+        </div>
     </div>
     <div class="container mt-3">
