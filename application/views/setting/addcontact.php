@@ -27,9 +27,11 @@
                         <?php }; ?>
                     </tbody>
                 </table>
+
+                <a href="<?= base_url('setting'); ?>">Kembali</a>
             </div>
             <div class="col-sm">
-
+                <?= $this->session->flashdata('message'); ?>
             </div>
         </div>
     </div>

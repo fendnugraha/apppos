@@ -34,12 +34,17 @@ class Auth extends CI_Controller
                 $sql = "SELECT * FROM user WHERE username ='$uname'";
 
                 $user = $this->db->query($sql)->row_array();
+                $setting = $this->db->get_where('setting', ['id' => 1])->row_array();
 
                 $data = [
                     'user_id' => $user['id'],
                     'uname' => $user['username'],
                     'role_id' => $user['role'],
-                    'fullname' => $user['fullname']
+                    'fullname' => $user['fullname'],
+                    'brand-name' => $setting['brand_name'],
+                    'slogan' => $setting['slogan'],
+                    'address' => $setting['address'],
+                    'phone' => $setting['phone']
                 ];
                 $this->session->set_userdata($data);
                 $this->db->where('username', $uname)->update('user', ['last_login' => $waktu]);

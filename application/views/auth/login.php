@@ -32,9 +32,11 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-dark mt-1">Sign in</button>
+                <?= $this->session->flashdata('message'); ?>
             </form>
             <a href="<?= base_url("auth/register"); ?> ">Daftar pengguna baru disini !</a>
         </div>
+
     </div>
 
 
