@@ -25,6 +25,12 @@
                     <input type="text" class="form-control" name="phone" id="phone" value="<?= $general['phone']; ?>">
                 </div>
             </div>
+            <div class="mb-1 row">
+                <label for="kas_awal" class="col-sm col-form-label">Kas Awal</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" name="kas_awal" id="kas_awal" value="<?= $general['kas_awal']; ?>">
+                </div>
+            </div>
             <hr>
             <div class="d-flex align-items-center justify-content-between">
                 <button class="btn btn-primary" type="submit">Submit</button>

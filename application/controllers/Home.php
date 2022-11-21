@@ -19,6 +19,8 @@ class Home extends CI_Controller
         $data['total_so'] = $this->db->query("SELECT sum(sales*price) as total FROM product_trace WHERE status = 1")->row_array();
         $data['laba'] = $this->db->query("SELECT sum((price*sales)-(cost*sales)) as laba FROM product_trace WHERE status = 1;")->row_array();
 
+        $data['cashflow'] = $this->db->get('cashflow')->result_array();
+
         $data['title'] = 'Dashboard';
         $this->load->view('include/header', $data);
         $this->load->view('home/dashboard', $data);

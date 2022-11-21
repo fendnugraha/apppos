@@ -27,7 +27,9 @@
     </div>
 </div>
 
-<div class="card">
+
+
+<div class="card mb-3">
     <div class="card-body">
         <div class="control-nav mb-3">
             <a href="<?= base_url('home/addProduct'); ?>" class=" btn btn-primary">+ Tambah Produk</a>
@@ -64,6 +66,57 @@
                             <a href="<?= base_url('home/edit_product/') . $p['inv_id'];; ?> ">Edit Produk</a>
                             <a href="<?= base_url('home/pr_detail/') . $p['inv_id'];; ?> ">Detail</a>
                         </td>
+                    </tr>
+                <?php }; ?>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<!-- cashflow -->
+<div class="card">
+    <div class="card-body">
+        <div class="control-nav mb-3">
+            <a href="<?= base_url('home/addProduct'); ?>" class=" btn btn-primary">+ Kas Masuk</a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCatProduct">
+                + Kas Keluar
+            </button>
+        </div>
+        <table class="table display table-striped">
+            <thead class="table-light">
+                <tr>
+                    <th>WAKTU</th>
+                    <th>INVOICE</th>
+                    <th>DESKRIPSI</th>
+                    <th>STATUS</th>
+                    <th>MASUK</th>
+                    <th>KELUAR</th>
+                    <th>USER</th>
+                    <th>UPDATE TERAKHIR</th>
+                    <th>OPSI</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <?php
+                foreach ($cashflow as $cf) {
+                    if ($cf['masuk'] > 0) {
+                        echo '<tr class="table-success">';
+                    } else {
+                        echo '<tr class="table-danger">';
+                    };
+                ?>
+                    <td><?= $cf['waktu']; ?></td>
+                    <td><?= $cf['invoice']; ?></td>
+                    <td><?= $cf['deskripsi']; ?></td>
+                    <td><?= $cf['status']; ?></td>
+                    <td><?= $cf['masuk']; ?></td>
+                    <td><?= $cf['keluar']; ?></td>
+                    <td><?= $cf['user_id']; ?></td>
+                    <td><?= date('Y-m-d H:s', $cf['date_modified']); ?></td>
+                    <td>
+                        <a href="<?= base_url('home/edit_cashflow/') . $cf['id'];; ?> ">Edit</a>
+                        <a href="<?= base_url('home/cf_detail/') . $cf['id'];; ?> ">Detail</a>
+                    </td>
                     </tr>
                 <?php }; ?>
             </tbody>

@@ -46,10 +46,13 @@ class Purchase extends CI_Controller
             $this->load->view('purchase/purchase', $data);
             $this->load->view('include/footer');
         } else {
+            $invoice = $this->purchase_model->invoice_po();
+            $jumlah = $this->input->post('p_qty') * $this->input->post('p_price');
 
             $data = [
                 'id' => null,
                 'waktu' => $this->input->post('p_date'),
+                'invoice' => $invoice,
                 'contact_id' => $this->input->post('p_sup'),
                 'product_id' => $this->input->post('p_id'),
                 'purchases' => $this->input->post('p_qty'),
@@ -57,12 +60,25 @@ class Purchase extends CI_Controller
                 'price' => $this->input->post('p_price'),
                 'status' => 1,
                 'date_created' => time(),
-                'user_id' => $user_id,
+                'user_id' => $user_id
+            ];
+
+            $data2 = [
+                'id' => null,
+                'waktu' => $this->input->post('p_date'),
+                'invoice' => $invoice,
+                'masuk' => 0,
+                'keluar' => $jumlah,
+                'status' => 1,
+                'deskripsi' => "Pembelian stok barang",
+                'date_modified' => time(),
+                'user_id' => $user_id
             ];
 
             $this->db->trans_begin();
 
             $this->db->insert('product_trace', $data);
+            $this->db->insert('cashflow', $data2);
 
             if ($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();

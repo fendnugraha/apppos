@@ -8,4 +8,24 @@ class Purchase_model extends CI_Model
 
         return $total_cost['cost'] / $total_cost['stok'];
     }
+
+    public function invoice_po()
+    {
+        $uname = $this->session->userdata('uname');
+        $sql = "SELECT * FROM user WHERE username ='$uname'";
+        // $data['tanggal'] = date('Y-m-d');
+        $user = $this->db->query($sql)->row_array();
+        $user_id = $user['id'];
+
+        $querycode = "SELECT MAX(RIGHT(invoice,7)) AS kd_max FROM product_trace
+                    WHERE user_id = '$user_id' and purchases > 0";
+        $q = $this->db->query($querycode);
+        if ($q->num_rows() > 0) {
+            $k = $q->row_array();
+            $tmp = ((int) $k['kd_max']) + 1;
+            return "PO.BK." . date('dmy') . "."  . $user["id"] . "."  . sprintf("%07s", $tmp);
+        } else {
+            return "PO.BK." . date('dmy') . "."  . $user["id"] . "."  . "0000001";
+        }
+    }
 }

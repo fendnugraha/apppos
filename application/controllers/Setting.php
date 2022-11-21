@@ -38,7 +38,8 @@ class Setting extends CI_Controller
                 'brand_name' => $this->input->post('brand-name'),
                 'slogan' => $this->input->post('slogan'),
                 'address' => $this->input->post('address'),
-                'phone' => $this->input->post('phone')
+                'phone' => $this->input->post('phone'),
+                'kas_awal' => $this->input->post('kas_awal')
             ];
 
             $this->db->update('setting', $data, ['id' => 1]);

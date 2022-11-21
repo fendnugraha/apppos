@@ -30,12 +30,12 @@
                 <tr>
                     <th>ID</th>
                     <th>WAKTU</th>
+                    <th>INVOICE</th>
                     <th>SUPPLIER</th>
                     <th>PRODUK</th>
                     <th>HARGA</th>
                     <th>QTY</th>
                     <th>TOTAL</th>
-                    <th>DIBUAT</th>
                     <th>STATUS</th>
                     <th>ACTION</th>
                 </tr>
@@ -52,12 +52,12 @@
                     <tr>
                         <td><?= $p['id']; ?></td>
                         <td><?= $p['waktu']; ?></td>
+                        <td><?= $p['invoice']; ?></td>
                         <td><?= $p['supplier']; ?></td>
                         <td><?= $p['product']; ?></td>
                         <td><?= $p['price']; ?></td>
                         <td><?= $p['purchases']; ?></td>
                         <td><?= $p['purchases'] * $p['price']; ?></td>
-                        <td><?= date('Y-m-d H:s', $p['date_created']) . " by " . $p['username']; ?></td>
                         <td><?= $status; ?></td>
                         <td>
                             <a href="<?= base_url('purchase/edit_purchase/') . $p['id'];; ?> ">Edit</a>
