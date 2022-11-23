@@ -9,6 +9,7 @@ class Home extends CI_Controller
 
         is_logged_in();
         $this->load->library('form_validation');
+        $this->load->model('home_model');
     }
 
     public function index()
@@ -20,6 +21,7 @@ class Home extends CI_Controller
         $data['laba'] = $this->db->query("SELECT sum((price*sales)-(cost*sales)) as laba FROM product_trace WHERE status = 1;")->row_array();
 
         $data['cashflow'] = $this->db->get('cashflow')->result_array();
+        $data['kasakhir'] = $this->home_model->kasAkhir();
 
         $data['title'] = 'Dashboard';
         $this->load->view('include/header', $data);
@@ -121,6 +123,100 @@ class Home extends CI_Controller
 
             $this->db->update('inventory', $data, ['id' => $p_id]);
             redirect('home/edit_product/' . $p_id);
+        }
+    }
+
+    public function cashin()
+    {
+        $user_id = $this->session->userdata('user_id');
+        $invoice = $this->home_model->invoice_so();
+
+        $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
+        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required|numeric|trim');
+        $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required|alpha_numeric_spaces|min_length[5]|trim');
+
+        if ($this->form_validation->run() == false) {
+            redirect('home');
+        } else {
+
+            $data = [
+                'id' => null,
+                'waktu' => $this->input->post('tanggal'),
+                'invoice' => $invoice,
+                'masuk' => $this->input->post('jumlah'),
+                'keluar' => 0,
+                'status' => 1,
+                'deskripsi' => $this->input->post('deskripsi'),
+                'date_modified' => time(),
+                'user_id' => $user_id
+            ];
+
+            $this->db->insert('cashflow', $data);
+            redirect('home');
+        }
+    }
+
+    public function cashout()
+    {
+        $user_id = $this->session->userdata('user_id');
+        $invoice = $this->home_model->invoice_po();
+
+        $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
+        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required|numeric|trim');
+        $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required|alpha_numeric_spaces|min_length[5]|trim');
+
+        if ($this->form_validation->run() == false) {
+            redirect('home');
+        } else {
+
+            $data = [
+                'id' => null,
+                'waktu' => $this->input->post('tanggal'),
+                'invoice' => $invoice,
+                'masuk' => 0,
+                'keluar' => $this->input->post('jumlah'),
+                'status' => 1,
+                'deskripsi' => $this->input->post('deskripsi'),
+                'date_modified' => time(),
+                'user_id' => $user_id
+            ];
+
+            $this->db->insert('cashflow', $data);
+            redirect('home');
+        }
+    }
+
+    public function edit_cashflow($id)
+    {
+        $data['cashflow'] = $this->db->get_where('cashflow', ['id' => $id])->row_array();
+        $data['status'] = $this->db->get('status')->result_array();
+
+        $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
+        $this->form_validation->set_rules('masuk', 'Jumlah', 'required|numeric|trim');
+        $this->form_validation->set_rules('keluar', 'Jumlah', 'required|numeric|trim');
+        $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required|alpha_numeric_spaces|min_length[5]|trim');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Dashboard/Edit Kas/' . $data['cashflow']['invoice'];
+            $this->load->view('include/header', $data);
+            $this->load->view('home/editkas', $data);
+            $this->load->view('include/footer');
+        } else {
+            $data = [
+                'masuk' => $this->input->post('masuk'),
+                'keluar' => $this->input->post('keluar'),
+                'deskripsi' => $this->input->post('deskripsi'),
+                'status' => $this->input->post('status'),
+                'date_modified' => time(),
+                'user_id' => $this->session->userdata('user_id')
+            ];
+
+            $this->db->update('cashflow', $data, ['id' => $id]);
+            $this->session->set_flashdata('message', '<div class="alert alert-info alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> Cashflow telah berhasil diedit.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>');
+            redirect('home/edit_cashflow/' . $id);
         }
     }
 }

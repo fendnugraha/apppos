@@ -9,6 +9,7 @@ class Sales extends CI_Controller
 
         is_logged_in();
         $this->load->library('form_validation');
+        $this->load->model('sales_model');
     }
 
     public function index()
@@ -47,10 +48,13 @@ class Sales extends CI_Controller
             $this->load->view('include/footer');
         } else {
             $cost = $this->db->get_where('inventory', ['id' => $this->input->post('p_id')])->row_array();
+            $invoice = $this->sales_model->invoice_so();
+            $jumlah = $this->input->post('p_qty') * $this->input->post('p_price');
 
             $data = [
                 'id' => null,
                 'waktu' => $this->input->post('p_date'),
+                'invoice' => $invoice,
                 'contact_id' => $this->input->post('p_sup'),
                 'product_id' => $this->input->post('p_id'),
                 'purchases' => 0,
@@ -62,9 +66,22 @@ class Sales extends CI_Controller
                 'user_id' => $user_id,
             ];
 
+            $data2 = [
+                'id' => null,
+                'waktu' => $this->input->post('p_date'),
+                'invoice' => $invoice,
+                'masuk' => $jumlah,
+                'keluar' => 0,
+                'status' => 1,
+                'deskripsi' => "Penjualan barang",
+                'date_modified' => time(),
+                'user_id' => $user_id
+            ];
+
             $this->db->trans_begin();
 
             $this->db->insert('product_trace', $data);
+            $this->db->insert('cashflow', $data2);
 
             if ($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();

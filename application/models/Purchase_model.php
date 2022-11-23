@@ -23,9 +23,9 @@ class Purchase_model extends CI_Model
         if ($q->num_rows() > 0) {
             $k = $q->row_array();
             $tmp = ((int) $k['kd_max']) + 1;
-            return "PO.BK." . date('dmy') . "."  . $user["id"] . "."  . sprintf("%07s", $tmp);
+            return "CO.BK." . date('dmy') . "."  . $user["id"] . "."  . sprintf("%07s", $tmp);
         } else {
-            return "PO.BK." . date('dmy') . "."  . $user["id"] . "."  . "0000001";
+            return "CO.BK." . date('dmy') . "."  . $user["id"] . "."  . "0000001";
         }
     }
 }

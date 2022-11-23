@@ -58,9 +58,9 @@
                         <td><?= $p['kode']; ?></td>
                         <td><?= $p['nama']; ?></td>
                         <td><?= $p['category']; ?></td>
-                        <td><?= $p['beli']; ?></td>
-                        <td><?= $p['jual']; ?></td>
-                        <td><?= $p['stok']; ?></td>
+                        <td><?= number_format($p['beli']); ?></td>
+                        <td><?= number_format($p['jual']); ?></td>
+                        <td><?= number_format($p['stok']); ?></td>
                         <td><?= date('Y-m-d H:s', $p['date_modified']); ?></td>
                         <td>
                             <a href="<?= base_url('home/edit_product/') . $p['inv_id'];; ?> ">Edit Produk</a>
@@ -76,11 +76,18 @@
 <!-- cashflow -->
 <div class="card">
     <div class="card-body">
-        <div class="control-nav mb-3">
-            <a href="<?= base_url('home/addProduct'); ?>" class=" btn btn-primary">+ Kas Masuk</a>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCatProduct">
-                + Kas Keluar
-            </button>
+        <div class="control-nav mb-3 d-flex justify-content-between">
+            <div class="control-btn">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cashInMod">
+                    <i class="fa-solid fa-money-bill"></i> Kas Masuk
+                </button>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cashOutMod">
+                    <i class="fa-solid fa-money-check-dollar"></i> Kas Keluar
+                </button>
+            </div>
+            <div class="end-balance">
+                <h2>Rp <?= number_format($kasakhir); ?>,-</h2>
+            </div>
         </div>
         <table class="table display table-striped">
             <thead class="table-light">
@@ -104,17 +111,26 @@
                     } else {
                         echo '<tr class="table-danger">';
                     };
+                    if ($cf['status'] == 1) {
+                        $status = "<span class='badge rounded-pill text-bg-success'>success</span>";
+                    } elseif ($cf['status'] == 2) {
+                        $status = "<span class='badge rounded-pill text-bg-danger'>void</span>";
+                    };
                 ?>
                     <td><?= $cf['waktu']; ?></td>
                     <td><?= $cf['invoice']; ?></td>
                     <td><?= $cf['deskripsi']; ?></td>
-                    <td><?= $cf['status']; ?></td>
-                    <td><?= $cf['masuk']; ?></td>
-                    <td><?= $cf['keluar']; ?></td>
+                    <td class="text-center"><?= $status; ?></td>
+                    <td><?= number_format($cf['masuk']); ?></td>
+                    <td><?= number_format($cf['keluar']); ?></td>
                     <td><?= $cf['user_id']; ?></td>
-                    <td><?= date('Y-m-d H:s', $cf['date_modified']); ?></td>
-                    <td>
-                        <a href="<?= base_url('home/edit_cashflow/') . $cf['id'];; ?> ">Edit</a>
+                    <td><?= date('Y-m-d H:i:s', $cf['date_modified']); ?></td>
+                    <td class="text-center">
+                        <?php if ($cf['deskripsi'] == "Pembelian stok barang" || $cf['deskripsi'] == "Penjualan barang") {
+                            echo "";
+                        } else { ?>
+                            <a href="<?= base_url('home/edit_cashflow/') . $cf['id'];; ?> ">Edit</a>
+                        <?php }; ?>
                         <a href="<?= base_url('home/cf_detail/') . $cf['id'];; ?> ">Detail</a>
                     </td>
                     </tr>
@@ -149,6 +165,82 @@
                         <label for="catprefix" class="col-sm col-form-label">Kode Prefix</label>
                         <div class="col-sm-3">
                             <input type="text" class="form-control" name="catprefix" id="catprefix" value="<?= set_value('catprefix'); ?>">
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="modal fade" id="cashInMod" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Kas Masuk (Income)</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="<?= base_url('home/cashin'); ?>" method="post">
+                    <div class="mb-1 row">
+                        <label for="tanggal" class="col-sm col-form-label">Tanggal</label>
+                        <div class="col-sm-8">
+                            <input type="datetime-local" class="form-control" name="tanggal" id="tanggal" value="<?= date('Y-m-d H:i'); ?>">
+                        </div>
+                    </div>
+                    <div class="mb-1 row">
+                        <label for="jumlah" class="col-sm col-form-label">Jumlah (Rp)</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="jumlah" id="jumlah" value="<?= set_value('jumlah'); ?>">
+                        </div>
+                    </div>
+                    <div class="mb-1 row">
+                        <label for="deskripsi" class="col-sm col-form-label">Deskripsi</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="deskripsi" id="deskripsi" value="<?= set_value('deskripsi'); ?>">
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="modal fade" id="cashOutMod" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Kas Keluar (Expense)</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="<?= base_url('home/cashout'); ?>" method="post">
+                    <div class="mb-1 row">
+                        <label for="tanggal" class="col-sm col-form-label">Tanggal</label>
+                        <div class="col-sm-8">
+                            <input type="datetime-local" class="form-control" name="tanggal" id="tanggal" value="<?= date('Y-m-d H:i'); ?>">
+                        </div>
+                    </div>
+                    <div class="mb-1 row">
+                        <label for="jumlah" class="col-sm col-form-label">Jumlah (Rp)</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="jumlah" id="jumlah" value="<?= set_value('jumlah'); ?>">
+                        </div>
+                    </div>
+                    <div class="mb-1 row">
+                        <label for="deskripsi" class="col-sm col-form-label">Deskripsi</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="deskripsi" id="deskripsi" value="<?= set_value('deskripsi'); ?>">
                         </div>
                     </div>
             </div>
