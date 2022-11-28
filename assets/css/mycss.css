@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 * {
-  font-family: "Nunito", sans-serif;
+  font-family: "Quicksand", sans-serif;
 }
 
 body {
@@ -24,7 +24,7 @@ a.setting-link {
 
 .card.card-page-title,
 .card.card-setting-menu {
-  padding: 15px;
+  padding: 10px 20px 10px 20px;
 }
 .card.card-page-title p,
 .card.card-page-title h4,

@@ -29,11 +29,14 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="<?= base_url('home'); ?> ">Dashboard</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('sales'); ?>">Penjualan</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('purchase'); ?>">Pembelian</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Transaksi
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="<?= base_url('purchase'); ?>">Pembelian</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('sales'); ?>">Penjualan</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?= base_url('report'); ?>">Report</a>
@@ -42,7 +45,7 @@
                         <a class="nav-link" href="<?= base_url('setting'); ?>">Setting</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-warning active" href="#">Sign as <?= $this->session->userdata('fullname'); ?></a>
+                        <a class="nav-link text-warning active" href="#">Sign as <strong><?= $this->session->userdata('fullname'); ?></strong></a>
                     </li>
                 </ul>
             </div>

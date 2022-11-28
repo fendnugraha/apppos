@@ -3,7 +3,7 @@
         <div class="card bg-primary text-bg-dark">
             <div class="card-body">
                 <p>Total Inventory</p>
-                <h1><i class="fa-solid fa-warehouse"></i> <?= number_format($total_inv['total_inv']); ?> ,-</h1>
+                <h2 class="d-flex justify-content-between"><i class="fa-solid fa-warehouse"></i> <b><?= number_format($total_inv['total_inv']); ?> ,-</b></h2>
             </div>
         </div>
     </div>
@@ -11,7 +11,7 @@
         <div class="card bg-warning text-bg-light">
             <div class="card-body">
                 <p>Total Pendapatan</p>
-                <h1><i class="fas fa-cash-register"></i> <?= number_format($total_so['total']); ?> ,-</h1>
+                <h2 class="d-flex justify-content-between"><i class="fas fa-cash-register"></i> <b><?= number_format($total_so['total']); ?> ,-</b></h2>
 
             </div>
         </div>
@@ -20,7 +20,7 @@
         <div class="card bg-success text-bg-dark">
             <div class="card-body">
                 <p>Total Keuntungan</p>
-                <h1><i class="fa-solid fa-sack-dollar"></i> <?= number_format($laba['laba']); ?> ,-</h1>
+                <h2 class="d-flex justify-content-between"><i class="fa-solid fa-sack-dollar"></i> <b><?= number_format($laba['laba']); ?> ,-</b></h2>
 
             </div>
         </div>
@@ -32,9 +32,9 @@
 <div class="card mb-3">
     <div class="card-body">
         <div class="control-nav mb-3">
-            <a href="<?= base_url('home/addProduct'); ?>" class=" btn btn-primary">+ Tambah Produk</a>
+            <a href="<?= base_url('home/addProduct'); ?>" class=" btn btn-primary"><i class="fa-solid fa-circle-plus"></i> Produk</a>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCatProduct">
-                + Tambah Kategori
+                <i class="fa-solid fa-circle-plus"></i> Kategori
             </button>
         </div>
         <table class="table display table-striped">
@@ -62,9 +62,19 @@
                         <td><?= number_format($p['jual']); ?></td>
                         <td><?= number_format($p['stok']); ?></td>
                         <td><?= date('Y-m-d H:s', $p['date_modified']); ?></td>
-                        <td>
-                            <a href="<?= base_url('home/edit_product/') . $p['inv_id'];; ?> ">Edit Produk</a>
-                            <a href="<?= base_url('home/pr_detail/') . $p['inv_id'];; ?> ">Detail</a>
+                        <td class="text-center">
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-ellipsis"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                        <li><a class="dropdown-item" href="<?= base_url('home/edit_product/') . $p['inv_id']; ?>">Edit Produk</a></li>
+                                        <li><a class="dropdown-item" href="<?= base_url('home/pr_detail/') . $p['inv_id']; ?>">Details</a></li>
+                                        <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                                    </ul>
+                                </li>
+                            </ul>
                         </td>
                     </tr>
                 <?php }; ?>
@@ -79,14 +89,14 @@
         <div class="control-nav mb-3 d-flex justify-content-between">
             <div class="control-btn">
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cashInMod">
-                    <i class="fa-solid fa-money-bill"></i> Kas Masuk
+                    <i class="fa-solid fa-circle-plus"></i> Kas Masuk
                 </button>
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cashOutMod">
-                    <i class="fa-solid fa-money-check-dollar"></i> Kas Keluar
+                    <i class="fa-solid fa-circle-plus"></i> Kas Keluar
                 </button>
             </div>
             <div class="end-balance">
-                <h2>Rp <?= number_format($kasakhir); ?>,-</h2>
+                <h2 class="fw-bold"><i class="fa-solid fa-wallet"></i> Rp <?= number_format($kasakhir); ?>,-</h2>
             </div>
         </div>
         <table class="table display table-striped">
@@ -123,15 +133,26 @@
                     <td class="text-center"><?= $status; ?></td>
                     <td><?= number_format($cf['masuk']); ?></td>
                     <td><?= number_format($cf['keluar']); ?></td>
-                    <td><?= $cf['user_id']; ?></td>
+                    <td><?= $cf['username']; ?></td>
                     <td><?= date('Y-m-d H:i:s', $cf['date_modified']); ?></td>
                     <td class="text-center">
-                        <?php if ($cf['deskripsi'] == "Pembelian stok barang" || $cf['deskripsi'] == "Penjualan barang") {
-                            echo "";
-                        } else { ?>
-                            <a href="<?= base_url('home/edit_cashflow/') . $cf['id'];; ?> ">Edit</a>
-                        <?php }; ?>
-                        <a href="<?= base_url('home/cf_detail/') . $cf['id'];; ?> ">Detail</a>
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <?php if ($cf['deskripsi'] == "Pembelian stok barang" || $cf['deskripsi'] == "Penjualan barang") {
+                                        echo "";
+                                    } else { ?>
+                                        <li><a class="dropdown-item" href="<?= base_url('home/edit_cashflow/') . $cf['id']; ?>">Edit</a></li>
+                                    <?php }; ?>
+
+                                    <li><a class="dropdown-item" href="<?= base_url('home/cf_detail/') . $cf['id'];; ?>">Details</a></li>
+                                    <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                                </ul>
+                            </li>
+                        </ul>
                     </td>
                     </tr>
                 <?php }; ?>
@@ -180,7 +201,7 @@
 
 <div class="modal fade" id="cashInMod" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content bg-success text-bg-dark">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Kas Masuk (Income)</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -207,8 +228,8 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                <button type="submit" class="btn btn-warning">Save changes</button>
             </div>
         </div>
         </form>
@@ -218,7 +239,7 @@
 
 <div class="modal fade" id="cashOutMod" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content bg-danger text-bg-dark">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Kas Keluar (Expense)</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -245,8 +266,8 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                <button type="submit" class="btn btn-warning">Save changes</button>
             </div>
         </div>
         </form>

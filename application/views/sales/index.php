@@ -3,7 +3,7 @@
         <div class="card bg-warning text-bg-light">
             <div class="card-body">
                 <p>Total Pendapatan</p>
-                <h1><i class="fas fa-cash-register"></i> <?= number_format($total_so['total']); ?> ,-</h1>
+                <h2 class="d-flex justify-content-between"><i class="fas fa-cash-register"></i> <b><?= number_format($total_so['total']); ?> ,-</b></h2>
 
             </div>
         </div>
@@ -12,7 +12,7 @@
         <div class="card bg-success text-bg-dark">
             <div class="card-body">
                 <p>Total Keuntungan</p>
-                <h1><i class="fa-solid fa-sack-dollar"></i> <?= number_format($laba['laba']); ?> ,-</h1>
+                <h2 class="d-flex justify-content-between"><i class="fa-solid fa-sack-dollar"></i> <b><?= number_format($laba['laba']); ?> ,-</b></h2>
 
             </div>
         </div>

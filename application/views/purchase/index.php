@@ -3,7 +3,7 @@
         <div class="card bg-primary text-bg-dark">
             <div class="card-body">
                 <p>Total Inventory</p>
-                <h1>Rp <?= number_format($total_inv['total_inv']); ?> ,-</h1>
+                <h2 class="d-flex justify-content-between">Rp <b><?= number_format($total_inv['total_inv']); ?> ,-</b></h2>
             </div>
         </div>
     </div>
@@ -11,7 +11,7 @@
         <div class="card bg-info text-bg-light">
             <div class="card-body">
                 <p>Total Pembelian</p>
-                <h1>Rp <?= number_format($total_po['total']); ?> ,-</h1>
+                <h2 class="d-flex justify-content-between">Rp <b><?= number_format($total_po['total']); ?> ,-</b></h2>
 
             </div>
         </div>
@@ -20,10 +20,10 @@
 <div class="card">
     <div class="card-body">
         <div class="control-nav mb-3">
-            <a href="<?= base_url('purchase/addPurchase'); ?>" class=" btn btn-primary">+ Tambah Pembelian</a>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addContact">
+            <a href="<?= base_url('purchase/addPurchase'); ?>" class=" btn btn-primary"> <i class="fa-solid fa-circle-plus"></i> Input Pembelian</a>
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addContact">
                 + Tambah Kontak
-            </button>
+            </button> -->
         </div>
         <table class="table display">
             <thead class="thead-dark">
