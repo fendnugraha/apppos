@@ -10,6 +10,7 @@ class Home extends CI_Controller
         is_logged_in();
         $this->load->library('form_validation');
         $this->load->model('home_model');
+        $this->load->model('finance_model');
     }
 
     public function index()
@@ -95,6 +96,16 @@ class Home extends CI_Controller
         $data['title'] = 'Dashboard - Product Detail - ' . $data['product']['nama'];
         $this->load->view('include/header', $data);
         $this->load->view('home/product_detail', $data);
+        $this->load->view('include/footer');
+    }
+
+    public function cf_detail($cf_id)
+    {
+        $data['cashflow'] = $this->db->get_where('cashflow', ['id' => $cf_id])->row_array();
+
+        $data['title'] = 'Dashboard - Cashflow Detail - ' . $data['cashflow']['invoice'];
+        $this->load->view('include/header', $data);
+        $this->load->view('home/cashflow_detail', $data);
         $this->load->view('include/footer');
     }
 
